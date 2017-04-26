@@ -13,15 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by Grebnev on 23.04.2017.
  */
 
-public class ChessSquare extends Actor {
+public class GameSquare extends Actor {
     private final char alphabet[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
-    private final Texture lightSquareTile = new Texture(Gdx.files.internal("data/square_light_tile.png"));
-    private final Texture darkSquareTile = new Texture(Gdx.files.internal("data/square_dark_tile.png"));
     private final Texture bgTable = new Texture(Gdx.files.internal("bg_table.jpg"));
     private final Texture lightSquare = new Texture(Gdx.files.internal("light_internal.png"));
     private final Vector2 indexPosition, pixelPosition;
-    private final ChessColor color;
-    private ChessPiece piece;
+    private final PieceColor color;
+    private GamePiece piece;
 
 
     public Vector2 getIndexPosition() {
@@ -34,18 +32,18 @@ public class ChessSquare extends Actor {
         return pixelPosition;
     }
 
-    public ChessPiece getPiece() {
+    public GamePiece getPiece() {
 
         return piece;
     }
 
-    public void setPiece(ChessPiece piece) {
+    public void setPiece(GamePiece piece) {
 
         this.piece = piece;
     }
 
 
-    public ChessSquare(Vector2 indexPosition, Vector2 pixelPosition, int size, ChessColor color) {
+    public GameSquare(Vector2 indexPosition, Vector2 pixelPosition, int size, PieceColor color) {
 
         this.indexPosition = indexPosition;
         this.pixelPosition = pixelPosition;
@@ -59,7 +57,7 @@ public class ChessSquare extends Actor {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
 
-                ChessSquare squareTouched = (ChessSquare)event.getListenerActor();
+                GameSquare squareTouched = (GameSquare) event.getListenerActor();
                 Vector2 stageCoords = squareTouched.localToStageCoordinates(new Vector2(x, y));
                 Gdx.app.debug("Input",
                         String.format("%s %s %s at position (Relative - X:%.2f, Y:%.2f) (Absolute - X:%.2f, Y:%.2f)",
@@ -71,7 +69,7 @@ public class ChessSquare extends Actor {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 
-                ChessSquare squareTouched = (ChessSquare)event.getListenerActor();
+                GameSquare squareTouched = (GameSquare) event.getListenerActor();
                 Vector2 stageCoords = squareTouched.localToStageCoordinates(new Vector2(x, y));
                 Gdx.app.debug("Input",
                         String.format("%s %s %s at position (Relative - X:%.2f, Y:%.2f) (Absolute - X:%.2f, Y:%.2f)",
@@ -88,15 +86,14 @@ public class ChessSquare extends Actor {
 
         batch.setColor(getColor());
 
-        if (color == ChessColor.BG_TABLE) {
+        if (color == PieceColor.BG_TABLE) {
             batch.draw(bgTable, 0, 0);
         }
 
-        if (color == ChessColor.DARK) {
-            //batch.draw(bgTable, 0, 0);
+        if (color == PieceColor.DARK) {
             batch.draw(lightSquare, getX(), getY(), getWidth(), getHeight());
         }
-        else if (color == ChessColor.LIGHT)
+        else if (color == PieceColor.LIGHT)
             batch.draw(lightSquare, getX(), getY(), getWidth(), getHeight());
 
         batch.setColor(Color.WHITE);

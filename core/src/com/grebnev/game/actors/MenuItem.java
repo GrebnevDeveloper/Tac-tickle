@@ -12,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class MenuItem extends Actor {
     private MenuType type;
     private Texture texture;
-    private Texture bgTable = new Texture(Gdx.files.internal("bg_table.jpg"));
-    private Texture bgMenu = new Texture(Gdx.files.internal("bg_menu.jpg"));
 
     public MenuItem(MenuType type) {
 
@@ -49,8 +47,6 @@ public class MenuItem extends Actor {
     public void draw(Batch batch, float parentAlpha) {
 
         super.draw(batch, parentAlpha);
-        //batch.draw(bgTable, 0, 0);
-        //batch.draw(bgMenu, getX(), getY());
         batch.draw(texture, getX(), getY());
     }
 }

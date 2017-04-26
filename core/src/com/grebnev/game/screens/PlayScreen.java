@@ -3,22 +3,22 @@ package com.grebnev.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.grebnev.game.actors.ChessBoard;
-import com.grebnev.game.engine.ChessEngine;
+import com.grebnev.game.actors.GameBoard;
+import com.grebnev.game.engine.GameEngine;
 
 /**
  * Created by Grebnev on 23.04.2017.
  */
 
 public class PlayScreen extends BaseGameScreens {
-    private ChessBoard board;
-    private ChessEngine engine;
+    private GameBoard board;
+    private GameEngine engine;
 
     public PlayScreen(final Game game) {
 
         super(game);
-        board = new ChessBoard(550);
-        engine = new ChessEngine(board);
+        board = new GameBoard((Gdx.graphics.getWidth() + Gdx.graphics.getHeight() - 30) / 2);
+        engine = new GameEngine(board);
         inputMultiplexer.addProcessor(board);
     }
 
